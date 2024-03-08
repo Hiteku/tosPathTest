@@ -1,5 +1,4 @@
 
-
 var FieldStrategyEmpty = function(field){
     var self = this;
     this.field = field;
@@ -94,6 +93,7 @@ var FieldStrategyDropDelete = function(field, deleteFinished, dropFinished, hasS
     this.field      = field;
     this.frameCount = 0;
     this.mode       = hasSpace ? Mode.TRY_DROP : Mode.TRY_DELETE;
+    wave1stballs = 0
 
     this.deletedWave = null;
     this.deleteFinished = deleteFinished;
@@ -145,9 +145,13 @@ var FieldStrategyDropDelete = function(field, deleteFinished, dropFinished, hasS
                 if( self.deleteFinished ){ self.deleteFinished(); }
             }
         }else{
+            wave1stballs = 0
             //設定消除珠動畫
             for(var i = 0 ; i < self.deletedWave.orderDeletePairs.length ; i++){
                 self.deletedWave.orderDeletePairs[i].balls[0].deletedPair = self.deletedWave.orderDeletePairs[i].balls;
+
+                if (self.frameCount == 0)
+                    wave1stballs += self.deletedWave.orderDeletePairs[i].balls.length
 
                 var startFrame = DELETE_SPEED * (i + 1);
                 for(var j = 0 ; j < self.deletedWave.orderDeletePairs[i].balls.length ; j++){
@@ -159,7 +163,7 @@ var FieldStrategyDropDelete = function(field, deleteFinished, dropFinished, hasS
             //紀錄落珠
             self.field.historyManager.addDeletedWave( self.deletedWave );
             self.deletedWave = self.field.historyManager.startDeleted();
-            comboManager.addWave( self.field.historyManager.getWaveNum() );
+            comboManager.addWave( self.field.historyManager.getWaveNum(), wave1stballs );
 
             self.mode = Mode.DELETING;
             self.frameCount = 0;

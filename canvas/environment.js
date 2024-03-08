@@ -1,5 +1,4 @@
 
-
 var EnvironmentManager = function(){
     // 落珠判定
     var DropSpace = function(){
@@ -53,7 +52,7 @@ var EnvironmentManager = function(){
     this.phantom    = null;
 
     this.freeMove   = false;
-    this.timeLimit  = 5;
+    this.timeLimit  = 30;
 
     // 紀錄模式
     this.stopReplay   = false;
