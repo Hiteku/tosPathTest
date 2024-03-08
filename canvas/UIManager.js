@@ -70,7 +70,6 @@ var ComboManager = function( scrollbar, comboInfo, historyManager ){
 
     this.moveNum = 0;
     this.comboNum = 0;
-    this.countNum = 0;
     this.extraComboNum = 0;
     this.waveNum = 0;
 
@@ -83,7 +82,6 @@ var ComboManager = function( scrollbar, comboInfo, historyManager ){
     this.resetBox = function(){
         self.moveNum = 0;
         self.comboNum = 0;
-        self.countNum = 0;
         self.extraComboNum = 0;
         self.waveNum = 0;
 
@@ -113,9 +111,7 @@ var ComboManager = function( scrollbar, comboInfo, historyManager ){
     }
     this.addWave = function( waveNum, wave1stballs ){
         if( waveNum == 0 ){
-            self.countNum += wave1stballs;
-            self.comboInfo.find('#countNum').text( self.countNum );
-            self.comboBox.append( $("<div align='center'>首消</div><hr>").addClass("comboLabel") );
+            self.comboBox.append( $("<div align='center'>首消 " + wave1stballs + " 粒</div><hr>").addClass("comboLabel") );
         }else if( waveNum == 1 ){
             self.comboBox.append( $("<div align='center'>落消</div><hr>").addClass("comboLabel") );
         }
